@@ -1,0 +1,33 @@
+{
+  "name": "learning-full-stack-javascript-development-mongodb-node-and-react-2424660-main",
+  "version": "1.0.0",
+  "description": "This is the repository for the LinkedIn Learning course Learning Full-Stack JavaScript Development: MongoDB, Node, and React. The full course is available from [LinkedIn Learning][lil-course-url].",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev:server": "node src/server/server.ts",
+    "dev:bundler": "webpack -w --mode=development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@types/express": "^5.0.6",
+    "@types/react-dom": "^19.2.3",
+    "ejs": "^5.0.2",
+    "express": "^5.2.1",
+    "mongodb": "^7.2.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "ts-loader": "^9.5.7",
+    "typescript": "^6.0.3",
+    "webpack": "^5.106.2",
+    "webpack-cli": "^7.0.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^8.59.0",
+    "eslint": "^10.2.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "prettier": "^3.8.3"
+  }
+}
