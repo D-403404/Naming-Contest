@@ -1,6 +1,6 @@
 
 import { MongoClient, ServerApiVersion } from 'mongodb';
-import { MONGODB_URI, DATABASE_NAME } from './config.ts';
+import { MONGODB_URI, DATABASE_NAME } from '../config.ts';
 
 const uri = MONGODB_URI;
 let connectedClient: MongoClient;

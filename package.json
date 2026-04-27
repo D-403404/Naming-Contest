@@ -7,19 +7,27 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev:server": "node src/server/server.ts",
+    "dev:server": "npx tsx src/server/server.ts",
+    "dev:api-server": "npx tsx src/api/api-server.ts",
     "dev:bundler": "webpack -w --mode=development",
+    "dev:docker": "docker-compose up",
+    "dev:data": "npx tsx src/dev/load-test-data.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@types/express": "^5.0.6",
     "@types/react-dom": "^19.2.3",
+    "axios": "^1.15.2",
+    "cors": "^2.8.6",
+    "css-loader": "^7.1.4",
     "ejs": "^5.0.2",
     "express": "^5.2.1",
+    "http-proxy-middleware": "^3.0.5",
     "mongodb": "^7.2.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "ts-loader": "^9.5.7",
+    "tsnd": "^1.1.0",
     "typescript": "^6.0.3",
     "webpack": "^5.106.2",
     "webpack-cli": "^7.0.2"
@@ -28,6 +36,7 @@
     "@typescript-eslint/parser": "^8.59.0",
     "eslint": "^10.2.1",
     "eslint-plugin-react-hooks": "^7.1.1",
-    "prettier": "^3.8.3"
+    "prettier": "^3.8.3",
+    "tsx": "^4.21.0"
   }
 }

@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "node16",
+    "module": "nodenext",
     "lib": ["dom", "ES6", "scripthost"],
     "jsx": "react-jsx",
-    "moduleResolution": "node16",
+    "moduleResolution": "nodenext",
     "allowJs": true,
     // "downlevelIteration": true,
     "esModuleInterop": true,
@@ -14,7 +14,8 @@
     "sourceMap": true,
     "useUnknownInCatchVariables": false,
     "allowImportingTsExtensions": true,
-    "rewriteRelativeImportExtensions": true
+    "rewriteRelativeImportExtensions": true,
+    // "ignoreDeprecations": "6.0"
   },
   "include": ["src"]
 }

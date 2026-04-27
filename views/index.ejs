@@ -10,9 +10,12 @@
 
 <body>
     <div id="app">
-        <%- initialContent -%>
+        <%- initialMarkup -%>
     </div>
+    <script>
+        window.initialData = <%- JSON.stringify(initialData) -%>;
+    </script>
+    <script src="main.js"></script>
 </body>
-<script src="main.js"></script>
 
 </html>

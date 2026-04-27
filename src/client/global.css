@@ -1,0 +1,29 @@
+.header {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contest-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 4px black;
+  background-color: whitesmoke;
+}
+
+.contest-id {
+  font-size: small;
+  color: gray;
+}
+
+.contest-category {
+  font: italic;
+}
+
+.contest-name {
+  font: bold;
+}
