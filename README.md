@@ -95,3 +95,10 @@ Check out my other courses on [LinkedIn Learning](https://www.linkedin.com/learn
 
 [lil-course-url]: https://www.linkedin.com/learning/learning-full-stack-javascript-development-mongodb-node-and-react-15581237?dApp=59033956
 [lil-thumbnail-url]: https://media.licdn.com/dms/image/C560DAQGx_lsYcLsXOA/learning-public-crop_675_1200/0/1671474208254?e=2147483647&v=beta&t=VWBgbqX4HosB4nvBrs6_xcEz7YpTKlRNMdUnpTDwK7o
+
+===============================
+
+## Personal Note
+1. Modifications were made in order to be compatible with newer versions of Typescript and Node.
+2. When navigating back to contest list, if the contests have been fetched, no API call will be made again.
+3. When navigating back to contest detail, only the most recent contest will be cached. This is due to the current setup: There is only 1 state to cache contest, so current contest is overwritten everytime we go to a different contest detail page.

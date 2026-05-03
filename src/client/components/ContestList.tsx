@@ -1,23 +1,27 @@
 import ContestCard from "./ContestCard.tsx";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { getContests } from "../api-client.ts";
+import { PageContext } from "./Context.ts";
 
-const ContestsList = ({
-  contests,
-  setContests,
-}: {
-  contests: Contest[];
-  setContests: Function;
-}) => {
+const ContestList = () => {
+  const { contests, setContests } =
+    useContext(PageContext);
+
   useEffect(() => {
+    if (contests.length > 0) {
+      console.log("Contests already loaded");
+      return;
+    }
+
     console.log("Fetch contests");
-    // getContests()
-    //   .then((data) => {
-    //     setContests(data);
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
+
+    getContests()
+      .then((data) => {
+        setContests(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   console.log("Rerender");
@@ -36,4 +40,4 @@ const ContestsList = ({
   );
 };
 
-export default ContestsList;
+export default ContestList;

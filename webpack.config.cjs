@@ -3,11 +3,11 @@ const webpack = require("webpack");
 module.exports = {
   entry: "./src/client/index.tsx",
   resolve: {
-    // 1. Tell Webpack how to handle .js imports in an ESM world
+    // Tell Webpack how to handle .js imports in an ESM world
     extensionAlias: {
       ".js": [".js", ".ts", ".tsx"],
     },
-    // 2. Keep your standard extensions
+    // Keep standard extensions
     extensions: [".ts", ".tsx", ".js", ".json"],
   },
   module: {
@@ -30,9 +30,13 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.EnvironmentPlugin({
-      HOST: 'localhost',
-      PORT: '3000'
-    })
-  ]
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify({
+        HOST: process.env.HOST || "localhost",
+        PORT: process.env.PORT || "8080",
+        MONGODB_URI: process.env.MONGODB_URI || "",
+        DATABASE_NAME: process.env.DATABASE_NAME || "local",
+      }),
+    }),
+  ],
 };

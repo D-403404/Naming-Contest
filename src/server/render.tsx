@@ -1,23 +1,31 @@
 import ReactDOMServer from "react-dom/server";
 
 import { App } from "../client/App.tsx";
-import { getContests } from "../client/api-client.ts";
-// import "./global.css";
+import {
+  getContests,
+  getContestById,
+} from "../client/api-client.ts";
 
-const serverRender = async () => {
+const serverRender = async (req: any) => {
   try {
-    const contests = await getContests();
+    console.log("Request params:", req.params);
+    const { id } = req.params;
+    const initialData = id
+      ? { currentContest: await getContestById(id) }
+      : { contests: await getContests() };
+
     const initialMarkup = ReactDOMServer.renderToString(
-      <App initialData={contests} />,
+      <App initialData={initialData} />,
     );
-    return { initialMarkup, initialData: contests };
+    return { initialMarkup, initialData };
   } catch (error) {
     console.error("Error fetching contests:", error);
+
     // Return empty data to prevent server crash
     const initialMarkup = ReactDOMServer.renderToString(
-      <App initialData={[]} />,
+      <App initialData={null} />,
     );
-    return { initialMarkup, initialData: [] };
+    return { initialMarkup, initialData: null };
   }
 };
 
