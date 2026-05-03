@@ -7,12 +7,16 @@ const ContestDetail = () => {
     useContext(PageContext);
 
   useEffect(() => {
-    if (currentContest) {
-      console.log("Current contest loaded:", currentContest.id);
+    // Check if current contest is already stored in context
+    if (
+      currentContest &&
+      currentContest.id === currentContestId
+    ) {
+      console.log("Current contest loaded:", currentContest);
       return;
     }
 
-    console.log("Fetch current contest");
+    console.log("Fetch current contest:", currentContestId);
 
     // Fetching current contest details
     getContestById(currentContestId)
@@ -23,7 +27,7 @@ const ContestDetail = () => {
       .catch((err) => {
         console.error(err);
       });
-  }, [currentContest?.id]);
+  }, []);
 
   return (
     <div className="contest">
@@ -33,7 +37,7 @@ const ContestDetail = () => {
       </div>
       <div className="title">Submitted Names</div>
       <div className="body list">
-        {currentContest?.names.map((name) => (
+        {currentContest?.names?.map((name) => (
           <div key={name.id} className="item">
             {name.name}
           </div>

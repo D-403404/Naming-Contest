@@ -13,7 +13,6 @@ const DetailPage = () => {
     // Handle navigation back to contest list if needed
     window.history.pushState({}, "", "/");
     setPage("list");
-    setCurrentContest(null); // Clear current contest when navigating back
   };
 
   return (

@@ -12,12 +12,12 @@ const ContestCard = ({ contest }: { contest: Contest }) => {
 
     // Handle contest click logic here
     window.history.pushState(
-      { id: contest.id },
+      { currentContestId: contest.id },
       "",
       `/contest/${contest.id}`,
     );
     setPage("detail");
-    setCurrentContestId(contest.id); // Set the current contest ID in context
+    setCurrentContestId(contest.id);
   };
 
   return (

@@ -3,11 +3,11 @@ const webpack = require("webpack");
 module.exports = {
   entry: "./src/client/index.tsx",
   resolve: {
-    // 1. Tell Webpack how to handle .js imports in an ESM world
+    // Tell Webpack how to handle .js imports in an ESM world
     extensionAlias: {
       ".js": [".js", ".ts", ".tsx"],
     },
-    // 2. Keep your standard extensions
+    // Keep standard extensions
     extensions: [".ts", ".tsx", ".js", ".json"],
   },
   module: {

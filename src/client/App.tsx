@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { PageContext } from "./components/Context.ts";
 import ContextProvider from "./components/ContextProvider.tsx";
 
@@ -22,19 +22,22 @@ const PageContent = () => {
   const {
     page,
     setPage,
+    currentContest,
     setCurrentContest,
     setCurrentContestId,
   } = useContext(PageContext);
 
   useEffect(() => {
     window.onpopstate = (event) => {
-      if (event.state && event.state.currentContest) {
+      console.log(event);
+      console.log("currentContest:", currentContest);
+      if (event.state && event.state.currentContestId) {
         setPage("detail");
       } else {
         setPage("list");
       }
-      setCurrentContest(event.state?.currentContest);
-      setCurrentContestId(event.state?.currentContest?.id);
+      // setCurrentContest(event.state?.currentContest);
+      setCurrentContestId(event.state?.currentContestId);
     };
   }, []);
 

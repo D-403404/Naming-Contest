@@ -11,15 +11,19 @@ const ContextProvider = ({
   const [page, setPage] = useState<"list" | "detail">(
     initialData.currentContest ? "detail" : "list",
   );
+
   const [contests, setContests] = useState<Contest[]>(
     initialData.contests || [],
   );
+
+  // Stores contest object to render details
   const [currentContest, setCurrentContest] =
-    useState<Contest | null>(
-      initialData.currentContest || null,
-    );
+    useState<Contest | null>(initialData.currentContest || null);
+
+  // Stores ID to fetch contest details when navigating to detail page
   const [currentContestId, setCurrentContestId] =
     useState<string>(initialData.currentContest?.id || "");
+
   return (
     <PageContext.Provider
       value={{
