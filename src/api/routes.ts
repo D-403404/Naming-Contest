@@ -1,9 +1,12 @@
 import express from "express";
 import { connectClient } from "../server/db.ts";
+import cors from "cors";
 
 // import data from "../data/test-data.json" with {type: 'json'};
 
 const router = express.Router();
+
+router.use(cors());
 
 router.get("/contests", async (req, res) => {
   const client = await connectClient();

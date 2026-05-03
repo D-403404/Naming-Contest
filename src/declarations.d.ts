@@ -20,7 +20,16 @@ declare interface Window {
 }
 
 interface Contest {
-  id: string | number;
+  id: string;
   categoryName: string;
   contestName: string;
+  title: string;
+  description: string;
+  names: Name[];
+}
+
+interface Name {
+  id: string;
+  name: string;
+  timestamp: string;
 }

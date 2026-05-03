@@ -30,9 +30,13 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.EnvironmentPlugin({
-      HOST: 'localhost',
-      PORT: '3000'
-    })
-  ]
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify({
+        HOST: process.env.HOST || "localhost",
+        PORT: process.env.PORT || "8080",
+        MONGODB_URI: process.env.MONGODB_URI || "",
+        DATABASE_NAME: process.env.DATABASE_NAME || "local",
+      }),
+    }),
+  ],
 };
