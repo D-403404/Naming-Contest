@@ -12,3 +12,28 @@ export const getContestById = async (id: string) => {
     await axios.get(`${API_SERVER_URL}/api/contests/${id}`)
   ).data;
 };
+
+export const addContest = async (
+  contestName: string,
+  contestCategory: string,
+  description: string,
+) => {
+  return (
+    await axios.post(`${API_SERVER_URL}/api/contests`, {
+      contestName,
+      contestCategory,
+      description,
+    })
+  ).data;
+};
+
+export const addNewName = async (
+  id: string,
+  newName: string,
+) => {
+  return (
+    await axios.put(`${API_SERVER_URL}/api/contests/${id}`, {
+      newName,
+    })
+  ).data.updatedContest;
+};
