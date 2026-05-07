@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { PageContext } from "./Context.ts";
 import { getContestById } from "../api-client.ts";
+import AddNameForm from "./AddNameForm.tsx";
 
 const ContestDetail = () => {
   const { currentContest, setCurrentContest, currentContestId } =
@@ -42,6 +43,7 @@ const ContestDetail = () => {
             {name.name}
           </div>
         ))}
+        <AddNameForm id={currentContestId} />
       </div>
     </div>
   );

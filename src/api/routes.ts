@@ -29,8 +29,14 @@ router.get("/contests/:id", async (req, res) => {
 router.post("/contests", async (req, res) => {
   const client = await connectClient();
   const newContest = req.body;
-  await client.collection("contests").insertOne(newContest);
-  res.status(201).send(newContest);
+  const doc = await client
+    .collection("contests")
+    .insertOne(newContest);
+
+  const contest = await client
+    .collection("contests")
+    .findOne({ _id: doc.insertedId });
+  res.status(201).send({ newContest: contest });
 });
 
 router.put("/contests/:id", async (req, res) => {

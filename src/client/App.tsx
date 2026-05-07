@@ -10,10 +10,7 @@ import ContestList from "./components/ContestList.tsx";
 export const App = ({ initialData }: { initialData: any }) => {
   return (
     <ContextProvider initialData={initialData}>
-      <Header content="App header" />
-      <main>
-        <PageContent />
-      </main>
+      <PageContent />
     </ContextProvider>
   );
 };
@@ -41,12 +38,28 @@ const PageContent = () => {
     };
   }, []);
 
+  let content;
   switch (page) {
     case "list":
-      return <ContestList />;
+      content = <ContestList />;
+      break;
     case "detail":
-      return <DetailPage />;
+      content = <DetailPage />;
+      break;
     default:
-      return <NotFoundPage />;
+      content = <NotFoundPage />;
   }
+
+  return (
+    <>
+      <Header
+        content={
+          page === "list"
+            ? "Naming Contests"
+            : currentContest?.contestName || "Contest Detail"
+        }
+      />
+      <main>{content}</main>
+    </>
+  );
 };

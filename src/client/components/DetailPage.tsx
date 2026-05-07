@@ -3,7 +3,7 @@ import { PageContext } from "./Context.ts";
 import ContestDetail from "./ContestDetail.tsx";
 
 const DetailPage = () => {
-  const { setPage, setCurrentContest } = useContext(PageContext);
+  const { setPage } = useContext(PageContext);
 
   const handleContestListClick = (
     event: React.MouseEvent<HTMLAnchorElement>,

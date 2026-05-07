@@ -1,15 +1,23 @@
 import React from "react";
+import { addNewName } from "../api-client.ts";
 
-const AddNameForm = () => {
+const AddNameForm = ({ id }: { id: string }) => {
   const handleSubmit = (
     event: React.FormEvent<HTMLFormElement>,
   ) => {
     event.preventDefault();
+
     const formData = new FormData(
       event.target as HTMLFormElement,
     );
     const name = formData.get("name") as string;
-    const description = formData.get("description") as string;
+    addNewName(id, name)
+      .then((updatedContest) => {
+        console.log("Updated Contest:", updatedContest);
+      })
+      .catch((error) => {
+        console.error("Error adding new name:", error);
+      });
   };
 
   return (
@@ -21,10 +29,6 @@ const AddNameForm = () => {
           type="text"
           placeholder="Enter name"
         />
-        <textarea
-          name="description"
-          placeholder="Enter description"
-        ></textarea>
         <button type="submit">Add Name</button>
       </form>
     </div>

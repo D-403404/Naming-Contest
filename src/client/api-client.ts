@@ -13,7 +13,7 @@ export const getContestById = async (id: string) => {
   ).data;
 };
 
-export const addContest = async (
+export const addNewContest = async (
   contestName: string,
   contestCategory: string,
   description: string,
@@ -24,7 +24,7 @@ export const addContest = async (
       contestCategory,
       description,
     })
-  ).data;
+  ).data.newContest;
 };
 
 export const addNewName = async (

@@ -4,8 +4,7 @@ import { getContests } from "../api-client.ts";
 import { PageContext } from "./Context.ts";
 
 const ContestList = () => {
-  const { contests, setContests } =
-    useContext(PageContext);
+  const { contests, setContests } = useContext(PageContext);
 
   useEffect(() => {
     if (contests.length > 0) {
