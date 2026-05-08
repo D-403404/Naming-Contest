@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { addNewName } from "../api-client.ts";
+import { PageContext } from "./Context.ts";
 
 const AddNameForm = ({ id }: { id: string }) => {
+  const { currentContest, setCurrentContest } =
+    useContext(PageContext);
+
+  if (!currentContest) return;
+
   const handleSubmit = (
     event: React.FormEvent<HTMLFormElement>,
   ) => {
@@ -11,9 +17,20 @@ const AddNameForm = ({ id }: { id: string }) => {
       event.target as HTMLFormElement,
     );
     const name = formData.get("name") as string;
+    if (
+      currentContest.names.find(
+        (nameObj) =>
+          nameObj.id === name.toLowerCase().replace(/\s+/g, "-"),
+      )
+    ) {
+      alert("Name already exists!");
+      return;
+    }
+
     addNewName(id, name)
       .then((updatedContest) => {
         console.log("Updated Contest:", updatedContest);
+        setCurrentContest(updatedContest);
       })
       .catch((error) => {
         console.error("Error adding new name:", error);
@@ -21,9 +38,9 @@ const AddNameForm = ({ id }: { id: string }) => {
   };
 
   return (
-    <div className="add-new-contest">
+    <div>
       <div className="title">Propose a New Name</div>
-      <form onSubmit={handleSubmit}>
+      <form className="body" onSubmit={handleSubmit}>
         <input
           name="name"
           type="text"

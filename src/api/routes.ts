@@ -39,7 +39,7 @@ router.post("/contests", async (req, res) => {
   res.status(201).send({ newContest: contest });
 });
 
-router.put("/contests/:id", async (req, res) => {
+router.post("/contests/:id/names", async (req, res) => {
   const client = await connectClient();
   const { newName } = req.body;
   const doc = await client
@@ -59,5 +59,31 @@ router.put("/contests/:id", async (req, res) => {
     );
   res.status(200).send({ updatedContest: doc });
 });
+
+router.delete(
+  "/contests/:id/names/:nameId",
+  async (req, res) => {
+    const client = await connectClient();
+    const contest = await client
+      .collection("contests")
+      .findOne({ id: req.params.id });
+    const deletedName = contest?.names.find(
+      (name: Name) => name.id === req.params.nameId,
+    );
+
+    const doc = await client
+      .collection<Contest>("contests")
+      .findOneAndUpdate(
+        { id: req.params.id },
+        {
+          $pull: {
+            names: { id: req.params.nameId },
+          },
+        },
+        { returnDocument: "after" },
+      );
+    res.status(200).send({ updatedContest: doc, deletedName });
+  },
+);
 
 export default router;

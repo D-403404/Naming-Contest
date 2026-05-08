@@ -14,14 +14,16 @@ export const getContestById = async (id: string) => {
 };
 
 export const addNewContest = async (
+  id: string,
   contestName: string,
-  contestCategory: string,
+  categoryName: string,
   description: string,
 ) => {
   return (
     await axios.post(`${API_SERVER_URL}/api/contests`, {
+      id,
       contestName,
-      contestCategory,
+      categoryName,
       description,
     })
   ).data.newContest;
@@ -32,8 +34,22 @@ export const addNewName = async (
   newName: string,
 ) => {
   return (
-    await axios.put(`${API_SERVER_URL}/api/contests/${id}`, {
-      newName,
-    })
+    await axios.post(
+      `${API_SERVER_URL}/api/contests/${id}/names`,
+      {
+        newName,
+      },
+    )
   ).data.updatedContest;
+};
+
+export const deleteName = async (
+  contestId: string,
+  nameId: string,
+) => {
+  return (
+    await axios.delete(
+      `${API_SERVER_URL}/api/contests/${contestId}/names/${nameId}`,
+    )
+  ).data;
 };

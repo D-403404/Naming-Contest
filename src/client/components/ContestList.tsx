@@ -2,6 +2,7 @@ import ContestCard from "./ContestCard.tsx";
 import { useContext, useEffect } from "react";
 import { getContests } from "../api-client.ts";
 import { PageContext } from "./Context.ts";
+import AddContestForm from "./AddContestForm.tsx";
 
 const ContestList = () => {
   const { contests, setContests } = useContext(PageContext);
@@ -27,7 +28,6 @@ const ContestList = () => {
 
   return (
     <div className="contest-preview-list">
-      <h3>Contests List</h3>
       <ul>
         {contests?.map((contest: Contest) => (
           <li key={contest.id}>
@@ -35,6 +35,7 @@ const ContestList = () => {
           </li>
         ))}
       </ul>
+      <AddContestForm />
     </div>
   );
 };
