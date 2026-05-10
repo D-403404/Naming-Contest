@@ -13,19 +13,9 @@ export const getContestById = async (id: string) => {
   ).data;
 };
 
-export const addNewContest = async (
-  id: string,
-  contestName: string,
-  categoryName: string,
-  description: string,
-) => {
+export const addNewContest = async (contest: Contest) => {
   return (
-    await axios.post(`${API_SERVER_URL}/api/contests`, {
-      id,
-      contestName,
-      categoryName,
-      description,
-    })
+    await axios.post(`${API_SERVER_URL}/api/contests`, contest)
   ).data.newContest;
 };
 

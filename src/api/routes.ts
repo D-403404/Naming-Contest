@@ -23,7 +23,11 @@ router.get("/contests/:id", async (req, res) => {
   const contest = await client
     .collection("contests")
     .findOne({ id: req.params.id });
-  res.status(200).send(contest);
+  if (contest) {
+    res.status(200).send(contest);
+  } else {
+    res.status(404).send({ error: "Contest not found" });
+  }
 });
 
 router.post("/contests", async (req, res) => {

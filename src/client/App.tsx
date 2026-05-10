@@ -8,6 +8,10 @@ import NotFoundPage from "./NotFoundPage.tsx";
 import ContestList from "./components/ContestList.tsx";
 
 export const App = ({ initialData }: { initialData: any }) => {
+  if (!initialData) {
+    return <NotFoundPage />;
+  }
+
   return (
     <ContextProvider initialData={initialData}>
       <PageContent />

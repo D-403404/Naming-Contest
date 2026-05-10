@@ -5,6 +5,7 @@ import {
   getContests,
   getContestById,
 } from "../client/api-client.ts";
+import NotFoundPage from "../client/NotFoundPage.tsx";
 
 const serverRender = async (req: any) => {
   try {

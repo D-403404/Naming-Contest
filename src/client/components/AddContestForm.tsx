@@ -3,7 +3,12 @@ import { addNewContest } from "../api-client.ts";
 import { PageContext } from "./Context.ts";
 
 const AddContestForm = () => {
-  const { setCurrentContest } = useContext(PageContext);
+  const {
+    setPage,
+    setContests,
+    setCurrentContest,
+    setCurrentContestId,
+  } = useContext(PageContext);
   const [showForm, setShowForm] = useState(false);
 
   const handleSubmit = (
@@ -18,11 +23,25 @@ const AddContestForm = () => {
     const id = contestName.toLowerCase().replace(/\s+/g, "-");
     const categoryName = formData.get("categoryName") as string;
     const description = formData.get("description") as string;
-    addNewContest(id, contestName, categoryName, description)
+
+    const newContest: Contest = {
+      id,
+      contestName,
+      categoryName,
+      description,
+      names: [],
+      title: `${contestName} (${categoryName})`,
+    };
+
+    addNewContest(newContest)
       .then((newContest) => {
         console.log("New Contest:", newContest);
 
+        setContests([]);
         setCurrentContest(newContest);
+        setCurrentContestId(newContest.id);
+        setPage("detail");
+
         window.history.pushState(
           { currentContestId: newContest.id },
           "",
