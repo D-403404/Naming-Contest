@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { PageContext } from "./Context.ts";
-import { getContestById } from "../api-client.ts";
+import { deleteName, getContestById } from "../api-client.ts";
+import AddNameForm from "./AddNameForm.tsx";
 
 const ContestDetail = () => {
   const { currentContest, setCurrentContest, currentContestId } =
@@ -29,6 +30,20 @@ const ContestDetail = () => {
       });
   }, []);
 
+  const handleNameClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    console.log(event);
+    const nameId = event.currentTarget.textContent?.toLowerCase().replace(/\s+/g, "-");
+    deleteName(currentContestId, nameId)
+      .then((data) => {
+        console.log("Updated Contest after deletion:", data.updatedContest);
+        console.log("Deleted name:", data.deletedName);
+        setCurrentContest(data.updatedContest);
+      })
+      .catch((error) => {
+        console.error("Error deleting name:", error);
+      });
+  }
+
   return (
     <div className="contest">
       <div className="title">Description</div>
@@ -38,11 +53,12 @@ const ContestDetail = () => {
       <div className="title">Submitted Names</div>
       <div className="body list">
         {currentContest?.names?.map((name) => (
-          <div key={name.id} className="item">
+          <div key={name.id} className="item link" onClick={handleNameClick}>
             {name.name}
           </div>
         ))}
       </div>
+      <AddNameForm id={currentContestId} />
     </div>
   );
 };

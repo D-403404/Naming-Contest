@@ -15,7 +15,7 @@ router.get("/contests", async (req, res) => {
     .find()
     .project({ _id: 0, id: 1, categoryName: 1, contestName: 1 })
     .toArray();
-  res.send(contests);
+  res.status(200).send(contests);
 });
 
 router.get("/contests/:id", async (req, res) => {
@@ -23,7 +23,71 @@ router.get("/contests/:id", async (req, res) => {
   const contest = await client
     .collection("contests")
     .findOne({ id: req.params.id });
-  res.send(contest);
+  if (contest) {
+    res.status(200).send(contest);
+  } else {
+    res.status(404).send({ error: "Contest not found" });
+  }
 });
+
+router.post("/contests", async (req, res) => {
+  const client = await connectClient();
+  const newContest = req.body;
+  const doc = await client
+    .collection("contests")
+    .insertOne(newContest);
+
+  const contest = await client
+    .collection("contests")
+    .findOne({ _id: doc.insertedId });
+  res.status(201).send({ newContest: contest });
+});
+
+router.post("/contests/:id/names", async (req, res) => {
+  const client = await connectClient();
+  const { newName } = req.body;
+  const doc = await client
+    .collection<Contest>("contests")
+    .findOneAndUpdate(
+      { id: req.params.id },
+      {
+        $push: {
+          names: {
+            id: newName.toLowerCase().replace(/\s+/g, "-"),
+            name: newName,
+            timestamp: new Date(),
+          },
+        },
+      },
+      { returnDocument: "after" },
+    );
+  res.status(200).send({ updatedContest: doc });
+});
+
+router.delete(
+  "/contests/:id/names/:nameId",
+  async (req, res) => {
+    const client = await connectClient();
+    const contest = await client
+      .collection("contests")
+      .findOne({ id: req.params.id });
+    const deletedName = contest?.names.find(
+      (name: Name) => name.id === req.params.nameId,
+    );
+
+    const doc = await client
+      .collection<Contest>("contests")
+      .findOneAndUpdate(
+        { id: req.params.id },
+        {
+          $pull: {
+            names: { id: req.params.nameId },
+          },
+        },
+        { returnDocument: "after" },
+      );
+    res.status(200).send({ updatedContest: doc, deletedName });
+  },
+);
 
 export default router;

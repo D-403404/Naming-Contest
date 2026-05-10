@@ -12,3 +12,34 @@ export const getContestById = async (id: string) => {
     await axios.get(`${API_SERVER_URL}/api/contests/${id}`)
   ).data;
 };
+
+export const addNewContest = async (contest: Contest) => {
+  return (
+    await axios.post(`${API_SERVER_URL}/api/contests`, contest)
+  ).data.newContest;
+};
+
+export const addNewName = async (
+  id: string,
+  newName: string,
+) => {
+  return (
+    await axios.post(
+      `${API_SERVER_URL}/api/contests/${id}/names`,
+      {
+        newName,
+      },
+    )
+  ).data.updatedContest;
+};
+
+export const deleteName = async (
+  contestId: string,
+  nameId: string,
+) => {
+  return (
+    await axios.delete(
+      `${API_SERVER_URL}/api/contests/${contestId}/names/${nameId}`,
+    )
+  ).data;
+};

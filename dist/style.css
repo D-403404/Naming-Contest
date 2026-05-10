@@ -18,11 +18,16 @@ body {
 .header {
   text-align: center;
   margin: 2rem;
+  font: bold;
 }
 
 .link {
   cursor: pointer;
   color: #0000ee;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .contest-preview-list {

@@ -31,5 +31,5 @@ interface Contest {
 interface Name {
   id: string;
   name: string;
-  timestamp: string;
+  timestamp: Date;
 }
